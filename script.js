@@ -1,22 +1,37 @@
-fetch("https://dummyjson.com/recipes")
-  .then(res => res.json())
-  .then(data => {
-    const products = document.getElementById("products");
+const pizzas = [
+  {
+    name: "Margherita Pizza",
+    image: "https://images.unsplash.com/photo-1601924582971-4e0a2c6c3a25",
+    desc: "Cheese, tomato sauce, basil"
+  },
+  {
+    name: "Pepperoni Pizza",
+    image: "https://images.unsplash.com/photo-1548365328-9f547fb0956b",
+    desc: "Pepperoni, cheese, sauce"
+  },
+  {
+    name: "Chicken Pizza",
+    image: "https://images.unsplash.com/photo-1594007654729-407eedc4be65",
+    desc: "Chicken, cheese, vegetables"
+  },
+  {
+    name: "Veggie Pizza",
+    image: "https://images.unsplash.com/photo-1604917877934-07d8f1a0d3f1",
+    desc: "Fresh vegetables, cheese"
+  }
+];
 
-    data.recipes.slice(0, 10).forEach(recipe => {
+const products = document.getElementById("products");
 
-      if (recipe.name.toLowerCase().includes("pizza")) {
+pizzas.forEach(pizza => {
+  const card = document.createElement("div");
+  card.classList.add("card");
 
-        const card = document.createElement("div");
-        card.classList.add("card");
+  card.innerHTML = `
+    <img src="${pizza.image}">
+    <h3>${pizza.name}</h3>
+    <p>${pizza.desc}</p>
+  `;
 
-        card.innerHTML = `
-          <img src="${recipe.image}">
-          <h3>${recipe.name}</h3>
-          <p>${recipe.ingredients.slice(0,3).join(", ")}</p>
-        `;
-
-        products.appendChild(card);
-      }
-    });
-  });
+  products.appendChild(card);
+});
